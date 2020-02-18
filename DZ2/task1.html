@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Урок 2 Задание 1</title>
+</head>
+<body>
+<script>
+    class ProductItem { //класс Продукт возьмем из урока 2
+        constructor(product, img = 'https://placehold.it/200x150') {
+            this.title = product.title;
+            this.price = product.price;
+            this.id = product.id;
+            this.img = img;
+        }
+
+        render() {
+            return `<div class="product-item" data-id="${this.id}">
+                <img src="${this.img}" alt="Some img">
+                <div class="desc">
+                    <h3>${this.title}</h3>
+                    <p>${this.price} \u20bd</p>
+                    <button class="buy-btn">Купить</button>
+                </div>
+            </div>`
+        }
+    }
+
+    class CartItem extends ProductItem { //класс продукт в корзине
+        constructor(id, title, price, img, quantity = 1, subtotal) {
+            super(id, title, price, img);   //у клсса-родителя берем базовые параметры
+            this.quantity = quantity;       //это количество одного и того же товара.
+            this.subtotal = this.price * this.quantity; //стоимость товара = цена умноженная на количество
+            this.shipping();
+            this.render();
+        }
+
+        shipping() {
+            //TODO:Метот связанный с доставкой конкретного товара, например, возвращает FREE
+        }
+
+        render() { // самостоятельный рендер - не от родительского класса
+            //TODO:Метод рендеринга товара в корзине
+        }
+
+    }
+
+    class Cart {
+        constructor(container = ".cart") {
+            this.container = container;
+            this.allItems = [];
+            this.discount();    //метод расчета скидки
+            this.grandtotal();  //метод расчета полной стоимости всей корзины товаров
+            this.checkout();    //метод Вызов оплаты корзины
+            this.render();      //рендеринг страницы корзины
+        }
+
+    }
+
+
+</script>
+</body>
+</html>
