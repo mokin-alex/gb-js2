@@ -54,36 +54,28 @@
             this.container = container;
             this.allItems = []; //корзина содержищая CartItem
             this.paymentAddress = paymentAddress; //Адрес доставки
-            this.shipping();    //метод расчета доставки товара.
-            this.discount();    //метод расчета скидки
-            this.grandtotal();  //метод расчета полной стоимости всей корзины товаров (с количсетвом, скидками и доставкой)
-                                // с учетом CartItem.subtotal и discount() и shipping();
-            this.checkout();    //метод Вызов оплаты корзины
             this.render();      //рендеринг страницы корзины со всеми экзеплярами товара.
-            this.addToCart();   //добавление в корзину
-            this.delFromCart();  //удаление из корзины
-
         }
 
-        shipping() {
+        shipping() { //метод расчета доставки товара.
         };
 
-        discount() {
+        discount() {  //метод расчета скидки
         };
 
-        grandtotal() {
+        grandtotal() { //метод расчета полной стоимости всей корзины товаров (с количсетвом, скидками и доставкой)// с учетом CartItem.subtotal и discount() и shipping();
         };
 
-        checkout() {
+        checkout() { //метод Вызов оплаты корзины
         };
 
-        render() {
+        render() {  //рендеринг страницы корзины со всеми экзеплярами товара.
         };
 
-        addToCart() {
+        addToCart() { //добавление в корзину
         };
 
-        delFromCart() {
+        delFromCart() { //удаление из корзины
         };
     }
 
