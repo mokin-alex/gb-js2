@@ -2,20 +2,20 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 const dummyImgURL = "https://via.placeholder.com/150.png/55909C/969696";
 
 // Переделать в ДЗ
-let getRequest = (url, cb) => {
-  let xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4) {
-      if (xhr.status !== 200) {
-        console.log('Error');
-      } else {
-        cb(xhr.responseText);
-      }
-    }
-  };
-  xhr.send();
-};
+// let getRequest = (url, cb) => {
+//   let xhr = new XMLHttpRequest();
+//   xhr.open('GET', url, true);
+//   xhr.onreadystatechange = () => {
+//     if (xhr.readyState === 4) {
+//       if (xhr.status !== 200) {
+//         console.log('Error');
+//       } else {
+//         cb(xhr.responseText);
+//       }
+//     }
+//   };
+//   xhr.send();
+// };
 
 class ProductList {
   constructor(container = '.products') {
@@ -40,7 +40,10 @@ class ProductList {
 
   _getProducts() {
     return fetch(`${API}/catalogData.json`)
-        .then(result => result.json())
+        .then(result => {
+          if (result.ok) return result.json();
+          else  console.log('Error:', result);
+        })
         .catch(error => {
           console.log('Error:', error);
         });
