@@ -72,8 +72,9 @@ header {
 .button_link {
     padding: 10px 12px;
 }
+
 .total {
-    background-color:  #5F9EA0;
+    background-color: #5F9EA0;
     color: #fafafa;
     font-weight: bold;
     padding: 40px 80px;
@@ -104,14 +105,17 @@ header {
     border-top: 1px solid #e8e8e8;
     border-left: 1px solid #e8e8e8;
 }
-.header__left{
+
+.header__left {
     margin: 30px;
 }
+
 .header__right {
     display: flex;
     margin: 30px;
     align-items: center;
 }
+
 .header-cart__wrap {
     position: relative;
 }
@@ -147,6 +151,7 @@ header {
     font-weight: 700;
     text-transform: uppercase;
 }
+
 .cart-item__h:hover {
     color: #f16d7f;
 }
@@ -166,6 +171,10 @@ header {
     padding-bottom: 16px;
     padding-top: 16px;
     position: relative;
+}
+
+.cart-item__img {
+    max-height: 100px;
 }
 
 .cart-item__txt {

@@ -71,7 +71,7 @@ class ProductItem {
         this.price = product.price;
         this.id = product.id_product;
         this.img = img;
-        this.quantity=product.quantity;
+        this.quantity = product.quantity;
     }
 
     render() {
@@ -87,7 +87,6 @@ class ProductItem {
 class CartItem extends ProductItem { //класс продукт в корзине
     constructor(id, title, price, img, quantity, subtotal) {
         super(id, title, price, img, quantity);   //у клсса-родителя берем базовые параметры
-        // this.quantity = product.quantity;       //это количество одного и того же товара.
         this.subtotal = this.price * this.quantity; //стоимость товара = цена умноженная на количество
         this.shipping(); //метод доставка для каждого товара может быть свои расчеты по доставке
         this.render();  //рендеринг diva экзепляра товара  в корзине
@@ -100,11 +99,11 @@ class CartItem extends ProductItem { //класс продукт в корзин
     render() { // самостоятельный рендер - не от родительского класса
         //TODO:Метод рендеринга экзепляра товара в корзине
         return `<div class="cart-item" data-id="${this.id}">
-                <img src="${this.img}" alt="Some img">
+                <img class="cart-item__img" src="${this.img}" alt="Some img">
                 <div class="cart-item__txt">
-                <h3>${this.title}</h3>
+                <h3 class="cart-item__h">${this.title}</h3>
                 <p>${this.price} \u20bd</p>
-                <p>${this.quantity} шт.</p>
+                <p class="cart-item__quantity">${this.quantity} шт.</p>
                 <p>${this.subtotal} \u20bd</p>
                 </div>
             </div>`;
@@ -150,15 +149,15 @@ class Cart { //"Набросок" класса Корзина
             this.allItems.push(productObject);
             block.insertAdjacentHTML('beforeend', productObject.render());
         }//рендеринг страницы корзины со всеми экзеплярами товара.
-        document.querySelector("#total-price").innerHTML = this.goodsAmount+" \u20bd";
+        document.querySelector("#total-price").innerHTML = this.goodsAmount + " \u20bd";
         document.querySelector(this.containerCount).innerHTML = this.goodsCount;
 
     }
 
-    addToCart() { //добавление в корзину
+    addToCart(id) { //добавление в корзину
     }
 
-    delFromCart() { //удаление из корзины
+    delFromCart(id) { //удаление из корзины
     }
 
     _getCart() {
@@ -176,4 +175,4 @@ class Cart { //"Набросок" класса Корзина
 
 const list = new ProductList();
 const cart = new Cart();
-
+// cart.delFromCart(123);
