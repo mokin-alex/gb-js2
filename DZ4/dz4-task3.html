@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>JS2 dz4 task 3</title>
+</head>
+<body>
+<div class="form">
+    <p>Имя:</p>
+    <input class="field" type="text" id="Name">
+    <p>Телефон:</p>
+    <input class="field" type="text" id="Tel">
+    <p>E-mail:</p>
+    <input class="field" type="text" id="Email">
+    <p>Комментарий:</p>
+    <textarea class="field" id="comment" cols="40" rows="3"></textarea>
+    <p>
+    <a href="#" onclick="checker();" class="button">Отправить</a>
+    </p>
+    <div class="check-result"></div>
+</div>
+<script>
+    function checker() {
+        let result = "Всё хорошо!";
+        let str;
+        let regExp = /[а-яa-z ]/ig;
+        str = document.getElementById("Name").value;
+        isGood= regExp.test(str);
+        if (!regExp.test(str)) result = "Введите только буквы!";
+        document.querySelector(".check-result").innerHTML= result;
+    }
+</script>
+</body>
+</html>
