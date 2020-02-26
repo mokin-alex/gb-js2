@@ -7,27 +7,28 @@
 </head>
 <body>
 <div class="form">
-    <p>Имя:</p>
-    <input class="field" type="text" id="Name">
-    <p>Телефон:</p>
-    <input class="field" type="text" id="Tel">
-    <p>E-mail:</p>
-    <input class="field" type="text" id="Email">
-    <p>Комментарий:</p>
-    <textarea class="field" id="comment" cols="40" rows="3"></textarea>
-    <p>
-    <a href="#" onclick="checker();" class="button">Отправить</a>
-    </p>
+    <label for="Name">Имя:</label><input class="field field_error" type="text" id="Name">
+    <label for="Tel">Телефон:</label><input class="field" type="text" id="Tel">
+    <label for="Email">e-mail:</label><input class="field field_error" type="text" id="Email">
+    <label for="comment">Комментарий:</label><textarea class="field" id="comment" cols="40" rows="3"></textarea>
+    <p> <a href="#" onclick="checker();" class="button">Отправить</a> </p>
     <div class="check-result"></div>
 </div>
 <script>
     function checker() {
+        document.querySelectorAll(".field_error").forEach(el => el.classList.remove("field_error"));
         let result = "Всё хорошо!";
         let str;
-        let regExp = /[а-яa-z ]/ig;
+        let regExp = /[^а-я a-z]/ig;
         str = document.getElementById("Name").value;
-        isGood= regExp.test(str);
-        if (!regExp.test(str)) result = "Введите только буквы!";
+        isBad= regExp.test(str);
+        if (isBad) {
+            result = "Введите только буквы!";
+            document.getElementById("Name").classList.add("field_error");
+        }
+        regExp = /^(\+7\(\d{3}\)\d{3}-\d{4})[^\w\*\-\+]/ig;
+    // /^(\+7\(\d{3}\)\d{3}-\d{4})[^\w`+/*-.~!@#$%^&*()_=]/;
+
         document.querySelector(".check-result").innerHTML= result;
     }
 </script>
