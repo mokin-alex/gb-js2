@@ -24,6 +24,7 @@ a {
     width: 200px;
     height: 34px;
     margin: 20px;
+    padding: 0 10px;
 }
 
 .field_error {
