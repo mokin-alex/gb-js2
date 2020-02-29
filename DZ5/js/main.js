@@ -26,6 +26,7 @@ const app = new Vue({
             this.filtered = this.products.filter(product => regexp.test(product.product_name));
             //TODO: не понятно теперь как обратиться к :key где лежит наш id
             this.products.forEach(el => {
+              //пока реализовано на JS, (как это красиво сделать на vue.js не понятно)
               const block = document.querySelector(`.product-item[data-id="${el.id_product}"]`);
               if(!this.filtered.includes(el)){
                 block.classList.add('invisible');

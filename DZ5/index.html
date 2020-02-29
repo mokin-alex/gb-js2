@@ -21,9 +21,8 @@
         </div>
     </header>
     <main>
-        <div class="products">
-            <div class="product-item" :class="{invisible: isInvisible }" v-for="product of products"
-                 :key="product.id_product" :data-id="product.id_product">
+        <div class="products" v-if="products.length">
+            <div class="product-item" v-for="product of products" :key="product.id_product" :data-id="product.id_product">
                 <img :src="imgCatalog" alt="Some img">
                 <div class="desc">
                     <h3>{{product.product_name}}</h3>
@@ -32,6 +31,7 @@
                 </div>
             </div>
         </div>
+        <p class="products_empty" v-else>Нет данных!</p>
     </main>
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"

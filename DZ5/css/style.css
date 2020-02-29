@@ -170,3 +170,9 @@ img {
     border: none;
     border-bottom: 2px solid #fafafa;
 }
+
+.products_empty {
+    margin: 80px;
+    text-align: center;
+    font-size: 1.5em;
+}
