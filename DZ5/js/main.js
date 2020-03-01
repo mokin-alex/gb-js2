@@ -4,12 +4,14 @@ const app = new Vue({
     el: '#app',
     data: {
         catalogUrl: '/catalogData.json',
+        cartUrl:'/getBasket.json',
         products: [],
         imgCatalog: 'https://placehold.it/200x150',
         searchLine: '', //слово для тестирования связки
         filtered: [],
         isVisibleCart: false,
-        cart: [{id_product: 1, img: 'https://placehold.it/200x150', product_name: 'Монитор', price: 9000, quantity: 1}],
+        cart: [{id_product: 1811, img: 'https://placehold.it/200x150', product_name: 'Монитор', price: 9000, quantity: 3}],
+
     },
     methods: {
         getJson(url) {
@@ -21,6 +23,16 @@ const app = new Vue({
         },
         addProduct(product) {
             console.log(product.id_product);
+        },
+        removeProduct(product){
+            console.log(product.id_product);
+            let productId = product.id_product;
+            let find = this.cart.find(product => product.id_product === productId);
+            if(find.quantity > 1){ // если товара > 1, то уменьшаем количество на 1
+                find.quantity--;
+            } else { // удаляем
+                this.cart.splice(this.cart.indexOf(find), 1);
+            }
         },
         filterGoods() {
             const regexp = new RegExp(this.searchLine, 'i');
@@ -44,6 +56,14 @@ const app = new Vue({
                 for (let el of data) {
                     this.products.push(el);
                 }
+            });
+        //заполним Корзину
+        this.getJson(`${API + this.cartUrl}`)
+            .then(data =>{
+                for (let el of data.contents) {
+                    this.cart.push(el); //добавим к существуещему содержимому корзины, там у нас три монитора
+                }
+                // this.cart = [...data.contents]; //либо полностью массив загрузим из json-запроса
             });
     }
 });

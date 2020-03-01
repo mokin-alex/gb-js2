@@ -18,7 +18,7 @@
                 </button>
             </form>
             <button class="btn-cart" type="button" @click="isVisibleCart=!isVisibleCart">Корзина</button>
-            <div class="cart-block" :class="{invisible: !isVisibleCart}">
+            <div class="cart-block" :class="{invisible: !isVisibleCart}" v-if="cart.length">
                 <div class="cart-item" v-for="product of cart" :key="product.id_product" :data-id="product.id_product">
                     <div class="product-bio">
                         <img :src="imgCatalog" alt="Some image">
@@ -30,10 +30,11 @@
                     </div>
                     <div class="right-block">
                         <p class="product-price">{{product.quantity * product.price}} ₽</p>
-                        <button class="del-btn" :data-id="product.id_product">&times;</button>
+                        <button class="del-btn" :data-id="product.id_product" @click="removeProduct(product)">&times;</button>
                     </div>
                 </div>
             </div>
+            <div class="cart-block" :class="{invisible: !isVisibleCart}" v-else>Корзина пуста.</div>
         </div>
     </header>
     <main>
