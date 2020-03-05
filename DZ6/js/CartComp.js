@@ -1,19 +1,19 @@
 Vue.component('cart', {
-    data(){
-      return {
-          imgCart: 'https://placehold.it/100x80',
-          cartUrl: '/getBasket.json',
-          cartItems: [],
-          showCart: false,
-      }
+    data() {
+        return {
+            imgCart: 'https://placehold.it/100x80',
+            cartUrl: '/getBasket.json',
+            cartItems: [],
+            showCart: false,
+        }
     },
     methods: {
-        addProduct(product){
+        addProduct(product) {
             this.$parent.getJson(`${API}/addToBasket.json`)
                 .then(data => {
-                    if(data.result === 1){
+                    if (data.result === 1) {
                         let find = this.cartItems.find(el => el.id_product === product.id_product);
-                        if(find){
+                        if (find) {
                             find.quantity++;
                         } else {
                             let prod = Object.assign({quantity: 1}, product);
@@ -25,10 +25,10 @@ Vue.component('cart', {
                 })
         },
         remove(item) {
-            this.$parent.getJson(`${API}/deleteFromBasket.json`)
+            this.$parent.getJson(`${API}/deleteFromBasket777777777.json`)  //данные не найдены
                 .then(data => {
-                    if(data.result === 1) {
-                        if(item.quantity>1){
+                    if (data.result === 1) {
+                        if (item.quantity > 1) {
                             item.quantity--;
                         } else {
                             this.cartItems.splice(this.cartItems.indexOf(item), 1)
@@ -37,10 +37,10 @@ Vue.component('cart', {
                 })
         },
     },
-    mounted(){
+    mounted() {
         this.$parent.getJson(`${API + this.cartUrl}`)
             .then(data => {
-                for(let el of data.contents){
+                for (let el of data.contents) {
                     this.cartItems.push(el);
                 }
             });
@@ -50,6 +50,7 @@ Vue.component('cart', {
             <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
             <div class="cart-block" v-show="showCart">
                 <p v-if="!cartItems.length">Корзина пуста</p>
+                <slot></slot>
                 <cart-item class="cart-item" 
                 v-for="item of cartItems" 
                 :key="item.id_product"

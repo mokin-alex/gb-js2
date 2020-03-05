@@ -3,14 +3,16 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 const app = new Vue({
     el: '#app',
     data: {
-        uuuuserSearch: '',
+        isError: false,
     },
     methods: {
-        getJson(url){
+        getJson(url) {
+            this.isError=false;
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
                     console.log(error);
+                    this.isError = true;
                 })
         },
     },

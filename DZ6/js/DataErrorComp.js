@@ -4,7 +4,7 @@ Vue.component('data-error', {
             errorMessage: "Ошибка получения данных!",
         }
     },
-    template: `<div>{{this.errorMessage}}</div> `,
+    template: `<div class="products_empty">{{this.errorMessage}}</div> `,
     mounted() {
         console.log(this);
     },

@@ -12,11 +12,15 @@
         <div class="logo">Интернет-магазин</div>
         <div class="cart">
             <search-form ref="SearchForm"></search-form>
-            <cart ref="cart"></cart>
+            <cart ref="cart">
+                <data-error v-show="isError"></data-error>
+            </cart>
         </div>
     </header>
     <main>
         <products ref="products"></products>
+<!--        <data-error :is-error="isError"></data-error>-->
+        <data-error v-show="isError"></data-error>
     </main>
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
