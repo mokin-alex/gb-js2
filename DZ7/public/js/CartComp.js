@@ -1,46 +1,52 @@
 Vue.component('cart', {
-    data(){
-      return {
-          imgCart: 'https://placehold.it/50x100',
-          cartUrl: '/userCart.json',
-          cartItems: [],
-          showCart: false,
-      }
+    data() {
+        return {
+            imgCart: 'https://placehold.it/50x100',
+            // cartUrl: '/userCart.json',
+            cartUrl: '/api/cart/',
+            cartItems: [],
+            showCart: false,
+        }
     },
     methods: {
 
-        addProduct(product){
+        addProduct(product) {
             let find = this.cartItems.find(el => el.id_product === product.id_product);
-            if(find){
-                this.$parent.putJson(`/api/cart/${find.id_product}`, {quantity: 1});
+            if (find) {
+                this.$parent.putJson(this.cartUrl+find.id_product, {quantity: 1});
                 find.quantity++;
             } else {
                 let prod = Object.assign({quantity: 1}, product);
-                this.$parent.postJson('/api/cart', prod)
-                  .then(data => {
-                      if (data.result === 1) {
-                          this.cartItems.push(prod);
-                      }
-                  });
+                this.$parent.postJson(this.cartUrl, prod)
+                    .then(data => {
+                        if (data.result === 1) {
+                            this.cartItems.push(prod);
+                        }
+                    });
             }
         },
         remove(item) {
-            this.$parent.getJson(`${API}/deleteFromBasket.json`)
-                .then(data => {
-                    if(data.result === 1) {
-                        if(item.quantity>1){
+            if (item.quantity > 1) {
+                this.$parent.putJson(this.cartUrl + item.id_product, {quantity: -1})
+                    .then(data => {
+                        if (data.result === 1) {
                             item.quantity--;
-                        } else {
-                            this.cartItems.splice(this.cartItems.indexOf(item), 1)
                         }
-                    }
-                })
+                    });
+            } else {
+                this.$parent.deleteJson(this.cartUrl + item.id_product, item)
+                    .then(data => {
+                        if (data.result === 1) {
+                            this.cartItems.splice(this.cartItems.indexOf(item), 1);
+                        }
+                    });
+            }
         },
     },
-    mounted(){
-        this.$parent.getJson(`${API + this.cartUrl}`)
+    mounted() {
+        this.$parent.getJson(this.cartUrl)
             .then(data => {
-                for(let el of data.contents){
+                for (let el of data.contents) {
                     this.cartItems.push(el);
                 }
             });
