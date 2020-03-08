@@ -14,6 +14,7 @@ Vue.component('cart', {
             let find = this.cartItems.find(el => el.id_product === product.id_product);
             if (find) {
                 this.$parent.putJson(this.cartUrl+find.id_product, {quantity: 1});
+                // console.log(find.id_product);
                 find.quantity++;
             } else {
                 let prod = Object.assign({quantity: 1}, product);

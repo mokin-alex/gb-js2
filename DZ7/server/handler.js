@@ -19,8 +19,11 @@ const handler = (req, res, action, file) => {
                     res.send('{"result": 0}');
                 } else {
                     res.send('{"result": 1}');
-                    if (action === 'add' || action === 'del') logger.logger(action, req.body.id_product, req.body.product_name, req.body.quantity);
-                    else logger.logger(action, req.params.id, req.body.product_name, req.body.quantity);
+                    // console.log(req);
+                    // console.log(res);
+                    // if (action === 'add' || action === 'del') logger.logger(action, req.body.id_product, req.body.product_name, req.body.quantity);
+                    // else logger.logger(action, req.params.id, req.body.product_name, req.body.quantity);
+                    logger.log(action, req, newCart);
                 }
             })
         }

@@ -1,23 +1,33 @@
 const fs = require('fs');
 const moment = require('moment');
+const file = './server/db/stats.json';
 
 const logItem = {
     timeEvent: moment,
     action: '',
-    productId: null,
+    productId: 0,
     productName: '',
-    request: '',
+    // quantity: 0,
 };
 
-const logger = (action, id, name, req) => {
-    console.log(req);
-    const file = './server/db/stats.json';
-    let log = "A"; //moment();
-    logItem.timeEvent = moment();
+const log = (action, req, cart) => {
+    // console.log(action);
+    const cartList = JSON.parse(cart);
+    logItem.timeEvent = moment().format('LLLL');
     logItem.action = action;
-    logItem.productId = id;
-    logItem.productName = name;
-    logItem.request = req;
+
+    if (action === 'add' || action === 'del') {
+        logItem.productId = +req.body.id_product;
+        logItem.productName = req.body.product_name;
+        logItem.quantity = req.body.quantity;
+    }
+    if (action === 'change' ) {
+        const find = cartList.contents.find(el => el.id_product === +req.params.id);
+        logItem.productId = +req.params.id;
+        logItem.productName = find.product_name;
+        logItem.quantity = find.quantity;
+    }
+
     fs.readFile(file, 'utf-8', (err, data) => {
         if (err) {
             console.log(err);
@@ -29,27 +39,8 @@ const logger = (action, id, name, req) => {
             })
         }
     })
-
-    // // console.log(moment(), action, id, name);
-    // // const log = logItem(moment, action, id, name);
-    // fs.readFile(file, 'utf-8', (err, data) => {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         let newLog = data + moment();
-    //         // newLog.push(log);
-    //         fs.writeFile(file, newLog, (err) => {
-    //             if (err) {
-    //                 console.log(err);
-    //                 // res.send('{"result": 0}');
-    //             } else {
-    //                 // res.send('{"result": 1}');
-    //             }
-    //         });
-    //     }
-    // })
 };
 
 module.exports = {
-    logger,
+    log,
 };
