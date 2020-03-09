@@ -1,11 +1,11 @@
 const fs = require('fs');
 const cart = require('./cart');
-const logger = require('./logger');
+const logger = require('./logger'); //maw homework
 
 const actions = {
     add: cart.add,
     change: cart.change,
-    del: cart.del,
+    del: cart.del, //maw homework
 };
 
 const handler = (req, res, action, file) => {
@@ -19,11 +19,7 @@ const handler = (req, res, action, file) => {
                     res.send('{"result": 0}');
                 } else {
                     res.send('{"result": 1}');
-                    // console.log(req);
-                    // console.log(res);
-                    // if (action === 'add' || action === 'del') logger.logger(action, req.body.id_product, req.body.product_name, req.body.quantity);
-                    // else logger.logger(action, req.params.id, req.body.product_name, req.body.quantity);
-                    logger.log(action, req, newCart);
+                    logger.log(action, req, newCart); //после успешной опреации запишем в лог это событие.
                 }
             })
         }

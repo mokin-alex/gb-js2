@@ -13,7 +13,7 @@ Vue.component('cart', {
         addProduct(product) {
             let find = this.cartItems.find(el => el.id_product === product.id_product);
             if (find) {
-                this.$parent.putJson(this.cartUrl+find.id_product, {quantity: 1});
+                this.$parent.putJson(this.cartUrl + find.id_product, {quantity: 1});
                 // console.log(find.id_product);
                 find.quantity++;
             } else {
@@ -26,16 +26,16 @@ Vue.component('cart', {
                     });
             }
         },
-        remove(item) {
+        remove(item) { //maw homework
             if (item.quantity > 1) {
-                this.$parent.putJson(this.cartUrl + item.id_product, {quantity: -1})
+                this.$parent.putJson(this.cartUrl + item.id_product, {quantity: -1}) //Серверную Корзину уменьшаем на 1
                     .then(data => {
                         if (data.result === 1) {
                             item.quantity--;
                         }
                     });
             } else {
-                this.$parent.deleteJson(this.cartUrl + item.id_product, item)
+                this.$parent.deleteJson(this.cartUrl + item.id_product, item) //Либо удаляем из Серверной Корзины по id
                     .then(data => {
                         if (data.result === 1) {
                             this.cartItems.splice(this.cartItems.indexOf(item), 1);

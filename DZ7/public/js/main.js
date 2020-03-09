@@ -37,7 +37,7 @@ const app = new Vue({
                   this.$refs.error.setError(error);
               });
         },
-        deleteJson(url, data) { // Homework
+        deleteJson(url, data) { // maw homework
             return fetch(url, {
                 method: 'DELETE',
                 headers: {

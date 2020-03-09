@@ -7,25 +7,29 @@ const logItem = {
     action: '',
     productId: 0,
     productName: '',
-    // quantity: 0,
+    quantity: 0, //количество товара в корзине (т.е. после выполнения операции)
 };
 
 const log = (action, req, cart) => {
-    // console.log(action);
     const cartList = JSON.parse(cart);
-    logItem.timeEvent = moment().format('LLLL');
+    logItem.timeEvent = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
     logItem.action = action;
 
-    if (action === 'add' || action === 'del') {
+    if (action === 'add') {
         logItem.productId = +req.body.id_product;
         logItem.productName = req.body.product_name;
         logItem.quantity = req.body.quantity;
     }
-    if (action === 'change' ) {
+    if (action === 'del') {
+        logItem.productId = +req.body.id_product;
+        logItem.productName = req.body.product_name;
+        logItem.quantity = 0; //после удаления в корзине ничего не остается - 0
+    }
+    if (action === 'change') {
         const find = cartList.contents.find(el => el.id_product === +req.params.id);
         logItem.productId = +req.params.id;
         logItem.productName = find.product_name;
-        logItem.quantity = find.quantity;
+        logItem.quantity = +find.quantity; // значение берем из новой Корзины после выполнения операции изменения
     }
 
     fs.readFile(file, 'utf-8', (err, data) => {
