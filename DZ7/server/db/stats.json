@@ -1,0 +1,37 @@
+[
+    {
+        "timeEvent": "2020-03-09 10:18:19.696",
+        "action": "change",
+        "productId": 124,
+        "productName": "Keyboard",
+        "quantity": 1
+    },
+    {
+        "timeEvent": "2020-03-09 10:18:20.849",
+        "action": "change",
+        "productId": 457,
+        "productName": "Gamepad",
+        "quantity": 1
+    },
+    {
+        "timeEvent": "2020-03-09 10:18:21.929",
+        "action": "del",
+        "productId": 457,
+        "productName": "Gamepad",
+        "quantity": 0
+    },
+    {
+        "timeEvent": "2020-03-09 10:18:23.362",
+        "action": "add",
+        "productId": 457,
+        "productName": "Gamepad",
+        "quantity": 1
+    },
+    {
+        "timeEvent": "2020-03-09 10:18:24.386",
+        "action": "change",
+        "productId": 457,
+        "productName": "Gamepad",
+        "quantity": 2
+    }
+]
